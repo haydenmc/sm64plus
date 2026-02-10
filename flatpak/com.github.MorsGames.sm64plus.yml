@@ -1,0 +1,56 @@
+app-id: com.github.MorsGames.sm64plus
+runtime: org.freedesktop.Platform
+runtime-version: '24.08'
+sdk: org.freedesktop.Sdk
+command: sm64plus
+
+finish-args:
+  # Display access
+  - --share=ipc
+  - --socket=x11
+  - --socket=wayland
+  - --device=dri
+  # Audio
+  - --socket=pulseaudio
+  # Game controllers
+  - --device=all
+  # Config/save file access
+  - --persist=.sm64plus
+
+modules:
+  # libusb (not in freedesktop SDK)
+  - name: libusb
+    buildsystem: autotools
+    sources:
+      - type: archive
+        url: https://github.com/libusb/libusb/releases/download/v1.0.27/libusb-1.0.27.tar.bz2
+        sha256: ffaa41d741a8a3bee244ac8e54a72ea05bf2879663c098c82fc5757853441575
+
+  # Capstone disassembly library (not in freedesktop SDK)
+  - name: capstone
+    buildsystem: cmake-ninja
+    builddir: true
+    config-opts:
+      - -DCMAKE_BUILD_TYPE=Release
+      - -DCAPSTONE_BUILD_STATIC=OFF
+      - -DCAPSTONE_BUILD_SHARED=ON
+    sources:
+      - type: archive
+        url: https://github.com/capstone-engine/capstone/archive/refs/tags/5.0.1.tar.gz
+        sha256: 2b9c66915923fdc42e0e32e2a9d7d83d3534a45bb235e163a70047951890c01a
+
+  - name: sm64plus
+    buildsystem: simple
+    build-options:
+      env:
+        VERSION: us
+    build-commands:
+      - make VERSION=${VERSION} -j${FLATPAK_BUILDER_N_JOBS}
+      - install -Dm755 build/${VERSION}_pc/sm64.${VERSION} ${FLATPAK_DEST}/bin/sm64plus
+      - cp -r build/${VERSION}_pc/gfx ${FLATPAK_DEST}/share/sm64plus/
+      - install -Dm644 flatpak/com.github.MorsGames.sm64plus.desktop ${FLATPAK_DEST}/share/applications/com.github.MorsGames.sm64plus.desktop
+      - install -Dm644 flatpak/com.github.MorsGames.sm64plus.metainfo.xml ${FLATPAK_DEST}/share/metainfo/com.github.MorsGames.sm64plus.metainfo.xml
+      - install -Dm644 flatpak/icon.png ${FLATPAK_DEST}/share/icons/hicolor/64x64/apps/com.github.MorsGames.sm64plus.png
+    sources:
+      - type: dir
+        path: ..

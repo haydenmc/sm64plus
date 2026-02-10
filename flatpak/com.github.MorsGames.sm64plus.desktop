@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=SM64Plus
+Comment=Enhanced Super Mario 64 PC port with extra features and options
+Exec=sm64plus
+Icon=com.github.MorsGames.sm64plus
+Terminal=false
+Type=Application
+Categories=Game;ActionGame;
+Keywords=mario;nintendo;platformer;n64;

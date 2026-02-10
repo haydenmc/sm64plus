@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>com.github.MorsGames.sm64plus</id>
+  <name>SM64Plus</name>
+  <summary>Enhanced Super Mario 64 PC port</summary>
+  <metadata_license>CC0-1.0</metadata_license>
+  <project_license>LicenseRef-proprietary</project_license>
+  <description>
+    <p>
+      SM64Plus is an enhanced PC port of Super Mario 64 that focuses on
+      customizability and adds features that fix issues in the base game
+      while enhancing gameplay with extra options.
+    </p>
+    <p>Features include:</p>
+    <ul>
+      <li>More responsive controls</li>
+      <li>Improved camera</li>
+      <li>Extended moveset</li>
+      <li>Continue level after getting a star</li>
+      <li>Optional extra modes</li>
+      <li>60FPS support via interpolation</li>
+      <li>Various bug fixes</li>
+    </ul>
+    <p>
+      Note: Building this application requires a legally obtained copy of
+      Super Mario 64 to extract game assets.
+    </p>
+  </description>
+  <url type="homepage">https://github.com/MorsGames/sm64plus</url>
+  <url type="bugtracker">https://github.com/MorsGames/sm64plus/issues</url>
+  <launchable type="desktop-id">com.github.MorsGames.sm64plus.desktop</launchable>
+  <icon type="stock">com.github.MorsGames.sm64plus</icon>
+  <provides>
+    <binary>sm64plus</binary>
+  </provides>
+  <content_rating type="oars-1.1">
+    <content_attribute id="violence-cartoon">moderate</content_attribute>
+  </content_rating>
+  <categories>
+    <category>Game</category>
+    <category>ActionGame</category>
+  </categories>
+</component>
