@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=SM64Plus
 Comment=Enhanced Super Mario 64 PC port with extra features and options
-Exec=sm64plus
+Exec=sm64plus-wrapper
 Icon=com.github.MorsGames.sm64plus
 Terminal=false
 Type=Application

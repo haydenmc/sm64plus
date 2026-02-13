@@ -2,7 +2,7 @@ app-id: com.github.MorsGames.sm64plus
 runtime: org.freedesktop.Platform
 runtime-version: '24.08'
 sdk: org.freedesktop.Sdk
-command: sm64plus
+command: sm64plus-wrapper
 
 finish-args:
   # Display access
@@ -47,7 +47,9 @@ modules:
     build-commands:
       - make VERSION=${VERSION} -j${FLATPAK_BUILDER_N_JOBS}
       - install -Dm755 build/${VERSION}_pc/sm64.${VERSION} ${FLATPAK_DEST}/bin/sm64plus
-      - cp -r build/${VERSION}_pc/gfx ${FLATPAK_DEST}/share/sm64plus/
+      - install -Dm755 flatpak/sm64plus-wrapper.sh ${FLATPAK_DEST}/bin/sm64plus-wrapper
+      - mkdir -p ${FLATPAK_DEST}/share/sm64plus
+      - cp -r build/${VERSION}_pc/gfx ${FLATPAK_DEST}/share/sm64plus/gfx
       - install -Dm644 flatpak/com.github.MorsGames.sm64plus.desktop ${FLATPAK_DEST}/share/applications/com.github.MorsGames.sm64plus.desktop
       - install -Dm644 flatpak/com.github.MorsGames.sm64plus.metainfo.xml ${FLATPAK_DEST}/share/metainfo/com.github.MorsGames.sm64plus.metainfo.xml
       - install -Dm644 flatpak/icon.png ${FLATPAK_DEST}/share/icons/hicolor/64x64/apps/com.github.MorsGames.sm64plus.png
